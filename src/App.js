@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import './App.css'
 
-function App() {
+
+function Heading() {
+  const [task, addTask] = useState('')
+  const [store, setStore] = useState([])
+
+  function addValues() {
+    setStore([...store, task])
+    addTask('')
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1> To Do List </h1>
+      <div className='container'>
+        <label> Enter Task </label>
+        <input value={task} type='text' onChange={(e) => addTask(e.target.value)}></input>
+        <button onClick={addValues}>Add</button>
+      </div>
+      <ul>
+        {store.map((value, index) => {
+          return <li key={index}>
+            {value}
+            <input type="checkbox" />
+            </li>
+        })}
+      </ul>
     </div>
-  );
+  )
 }
 
-export default App;
+export { Heading }; 
